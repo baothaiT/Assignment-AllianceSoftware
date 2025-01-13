@@ -18,7 +18,6 @@ CREATE TABLE Departments (
     department_id VARCHAR(50) PRIMARY KEY,           
     department_name VARCHAR(100) NOT NULL,  
     manager_id VARCHAR(50),              
-    CONSTRAINT unique_manager_per_department UNIQUE (manager_id),
     CONSTRAINT fk_manager_id FOREIGN KEY (manager_id) REFERENCES Employees(employee_id)
 );
 
@@ -55,3 +54,14 @@ CREATE TABLE Activities (
     employee_id VARCHAR(50) NOT NULL,
     CONSTRAINT fk_activity_employee FOREIGN KEY (employee_id) REFERENCES Employees(employee_id)
 );
+
+CREATE TABLE Positions (
+    positions_id VARCHAR(50) PRIMARY KEY,
+	positions_name DATE NOT NULL, 
+    employee_id VARCHAR(50) NOT NULL,
+    CONSTRAINT fk_positions_employee FOREIGN KEY (employee_id) REFERENCES Employees(employee_id)
+);
+
+CREATE UNIQUE INDEX unique_manager_per_department
+ON Departments (manager_id)
+WHERE manager_id IS NOT NULL;
