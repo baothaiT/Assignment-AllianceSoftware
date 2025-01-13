@@ -1,32 +1,20 @@
-﻿using System;
-
-class Program
+﻿class Program
 {
-    static bool IsMeowString(string X)
+    static bool IsMeowString(string sound)
     {
-        if (string.IsNullOrEmpty(X)) return false;
-
-        // Biến để theo dõi trạng thái hiện tại (m, e, o, w)
-        char currentChar = 'm';
-
-        foreach (char ch in X)
-        {
-            if (ch != 'm' && ch != 'e' && ch != 'o' && ch != 'w')
-                return false;
-
-            if (ch < currentChar)
-                return false;
-
-            currentChar = ch;
-        }
-        return true;
+        // Check if the string is empty or null
+        if (string.IsNullOrEmpty(sound)) return false;
+        string soundMeowValid = "meow";
+        string result = new string(sound.Trim().ToLower().Distinct().ToArray());
+        return result.Equals(soundMeowValid);
     }
-
     static void Main()
     {
-        // Các test cases
-        string[] testStrings = { "mmmmeoooow", "meow", "meowwww", "mmeeooww", "meo", "mow", "mew", "maaow" };
-
+        // Test cases
+        string[] testStrings = {
+            "mmeow" , "meeow", "meoow", "meoww", "mmmeow", "meeeow", "meooow", "meowww", "mmmeeeow", "meooowww", "mmmmeoooow", " mmeow ", "Mmeow",  // Valid
+            "ammeow", "mmaeow", "mmeaow", "mmeoaw", "meo", "mow", "mew", "maaow" // Invalid
+        };
         foreach (var str in testStrings)
         {
             Console.WriteLine($"{str}: {IsMeowString(str)}");
