@@ -2,14 +2,14 @@ CREATE DATABASE UserManament;
 USE UserManament;
 
 CREATE TABLE Employees (
-    employee_id VARCHAR(50) PRIMARY KEY,                 
+    employee_id VARCHAR(50) PRIMARY KEY,
+	employee_code VARCHAR,
     first_name VARCHAR(50) NOT NULL,                  
     last_name VARCHAR(50) NOT NULL,                   
     date_of_birth DATE NOT NULL,                      
     start_date DATE NOT NULL,                         
     department_id VARCHAR(50),                        
-    position VARCHAR(100),                            
-    is_manager bit not null default 0,                
+    position VARCHAR(100),                
     email VARCHAR(100) UNIQUE,                        
     phone VARCHAR(15)                                 
 );
@@ -65,3 +65,6 @@ CREATE TABLE Positions (
 CREATE UNIQUE INDEX unique_manager_per_department
 ON Departments (manager_id)
 WHERE manager_id IS NOT NULL;
+
+
+CREATE UNIQUE INDEX unique_employmentCode ON Employees (employee_code)
